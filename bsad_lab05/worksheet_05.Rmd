@@ -1,0 +1,116 @@
+---
+title: "Business Analytics Lab Workshop 5"
+author: "Kajal Chokshi"
+date: "June 7th 2017"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+subtitle: CME Group Foundation Business Analytics Lab
+---
+
+###About
+In a given year, if it rains more, we may see that there might be an increase in crop production. This is because more water may lead to more plants. This is a direct relationship the number of fruits may be able to be predicted by amount of waterfall in a certain year. It makes simple linear regression is an extremely useful concept that allows us to predict values of a certain variable based off another variable. 
+
+This lab will explore the concepts of simple linear regression, multiple linear regression, and watson analytics. 
+
+###SetUp
+
+Make sure to download the folder titled 'bsad_lab5' zip folder and extract the folder to unzip it. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab.
+
+----------
+
+###Task 1
+
+First, read in the marketing data that was used in the last lab. It can be found in the downloaded folder bsad_lab5. Make sure to view the file to ensure it was read in correctly. 
+
+```{r}
+mydata <-read.csv(file="data/marketing.csv")
+mydata
+```
+
+Next, apply the 'cor' function to the data to understand the correlations between variables. This is a great way to compare the correlations between all variables.
+
+Why is the value "1.0" down the diagonal? Which pairs seem to have the strongest correlations? Answer and list the pairs below the matrix. 
+
+```{r}
+cor(mydata)
+```
+
+From the matrix, its clear that Sales and Radio have the strongest correlation. So, create a scatterplot between the two to visualize the data. Make sure to extract the columns.
+
+```{r}
+pos  <- mydata$pos
+paper <- mydata$paper
+tv <- mydata$tv
+sales <- mydata$sales
+radio <- mydata$radio
+
+plot(radio,sales)
+```
+
+From this plot, it seems the points are scattered in an almost linear way. So, we will try to fit a simple linear regression model to the graph. 
+
+The 'lm' function is a very useful one. The function is set up as lm(y~x). where the x variable, the independent variabler, predicts values of the y variable, or the dependent variable.
+
+In the regression below, we are using radio ads to predict sales. We print out a summary to view the quantitative facts about the linear model. 
+
+```{r}
+reg <- lm(sales~radio) #
+summary(reg)
+```
+
+Report and interpret the R-Squared value below. 
+
+
+Because the R-Squared value is so high, it indicates that the model is a good fit, but not perfect. We will overlay a trend plot over the original plot we had. This will show how far the predictions are from the actual value. The distance from the actual versus the predicted is the residual.
+
+```{r}
+plot(radio,sales)
+abline(reg,col="blue",lwd=2) #Add a trend line plot using the linear model we created above
+```
+
+List some observations from this plot. 
+
+----------
+
+###Task2
+
+Sometimes, one variable is very good at predicting another variable. But most times, there are more than one factors that affect the prediction of another variable. While increased rainfall is a good predictor of increased crop supply, decreased herbivores can also result in an increase of crops. This idea is a loose metaphor for multiple linear regression. 
+
+In R, multiple linear regression takes the form of lm(y~ x0 + x1 + x2 .... ), where y is the value that is being predicted, or the dependent value and the x variables are the predictors or the independent values. 
+
+Lets create a multiple linear regression predicting sales using radio and tv. 
+
+```{r}
+mlr1 <-lm(sales~radio + tv)
+summary(mlr1)
+```
+
+For mlr1, the R-Squared values is 0.9577 and the Adj R-Squared is 0.9527. 
+
+Create a Multiple Linear Regression Model for each of the following, display the summary statistics, and write the values for R-Squared and Adj R-Squared: 
+
+  1. mlr2 = Sales predicted by radio, tv, and pos
+  2. mlr3 = Sales predicted by radio, tv, pos, and paper
+
+Based purely on the values for R-Squared and Adj R-Squared, which linear regression model is best in predicting sales. Explain why. 
+
+After deciding which model predicts sales best, we will confirm the it truly is the best model by predicting sales given independent variables. 
+
+Given that Radio =69, TV=255, POS=1.5, and Paper= 75, calculate the predicted sales value for each of the three models above. 
+
+
+----------
+
+###Task 3
+
+To complete the last task, follow the directions found in the worksheet. Make sure to screenshot and attach any pictures of the results obtained or any questions asked. 
+
+  1. Logon to your Watson Analytics account at watsonanalytics.com
+  2. Upload the file marketing.csv unless already in your folder
+  3. Use the Predictive module to analyze the data
+  4. Note the predictive power strength of reported variables. Consider the one field predictive model only.
+  5. How do Watson results reconcile with your findings based on the R regression analysis in task 2? Explain how.
+
+

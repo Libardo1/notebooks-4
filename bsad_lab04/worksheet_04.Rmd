@@ -1,0 +1,182 @@
+---
+title: "Business Analytics Lab Workshop 4"
+author: "Kajal Chokshi"
+date: "June 7th 2017"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+subtitle: CME Group Foundation Business Analytics Lab
+---
+
+###About
+
+R can be used to make basic visual analytics, which can be helpful in understanding the data holistically. Additionally, R can help find correlations between variables and create scatter plots. 
+
+In this lab we will delve deeper into the marketing data set with R visual analytics and use Tableau to visualize the credit risk data set. 
+
+###SetUp
+
+Make sure to download the folder titled 'bsad_lab4' zip folder and extract the folder to unzip it. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working
+Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab.
+
+----------
+
+###Task 1
+
+First, read in the 'marketing.csv' file and make sure all the columns are capture. 
+
+```{r}
+mydata <-read.csv(file="data/marketing.csv")
+mydata
+```
+
+Now, we will use somme visuals to observe some differences. 
+
+First create a bar chart of the sales variable. Remember to extract the sales variable before calling it.  
+
+```{r}
+sales <- mydata$sales
+barplot(sales)
+
+```
+
+Next, create a histogram of sales. 
+
+```{r}
+hist(sales)
+```
+
+What are some observable differences between the boxplot and the histogram? Please record your observations. 
+
+Lastly, create a pie chart of sales.
+
+```{r}
+pie(sales)
+```
+
+Why is this visual not a good representation of the data? What makes the histogram a better representation?
+
+----------
+
+###Task 2
+
+The previous task focused on visualizing one variable. A good way to visualize two variables would be a scatter plot or a correlation matrix. 
+
+Lets create a scatterplot of Sales vs. Radio. 
+
+```{r}
+radio <- mydata$radio
+plot(radio,sales)
+```
+
+It might be easier to notice a trend if there was a line that fit through the points. So, lets repeat using the function scatter.smooth, which adds a smooth curve computed by loess, a method to locally smooth a curve. 
+
+```{r}
+scatter.smooth(radio,sales)
+```
+
+Now, repeat below for Sales vs. POS, following the example that was just provided. Observe and note any trends in the scatter plots and potential relationships below. 
+
+To quantify the data, its best to look at the correlation between two variables.
+
+```{r}
+cor(sales,radio)
+```
+
+What does this correlation explain? 
+
+Below, compute the correlation between every pair of variables (Sales & TV, Sales & POS, Sales & Pape). Make sure to extract the variables first and then compute the correlation. 
+
+----------
+
+###Task 3
+
+Follow the directions on the worksheet.  
+
+1. Refer to file 'creditrisk.csv' from worksheet 1. 
+
+2. Start Tableau and enter your LUC email if prompted.
+
+3. Import the file into Tableau. Choose the Text File option when importing
+
+4. In a new sheet tab drag-drop 'Age' to Rows and select the histogram view. Note the bar like view and breakdowns. Which age 'bin' has the highest count? What is the count?
+
+5. Drag-drop 'Marital Status' to the Marks Color. Which age 'bin' has highest divorce count? What is the count?
+
+6. From 'Show Me' menu change the view to bubbles, and treemaps.
+
+7. Explain how age and marital status data are represented in each of the three views (histogram, bubbles, & treemaps).
+
+8. If you were to show the age with the highest divorce count which of the three views would you select and why?
+
+9. In a new sheet tab drag-drop Months Employed to Rows and Age to Columns. Switch the type for each measure from Sum to Dimension. You should obtain what looks like a scatter plot.
+
+10. Add to the scatter plot the Gender by drag-drop to the Marks Color. Share observations
+
+11. In a new sheet generate a view of your own creation and share your insights
+
+Post screenshots of all your work from Tableau below. Make sure to include the comments if prompted. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

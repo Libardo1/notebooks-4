@@ -1,0 +1,147 @@
+---
+title: "Business Analytics Lab Workshop 3"
+author: "Kajal Chokshi"
+date: "June 7th 2017"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+subtitle: CME Group Foundation Business Analytics Lab
+---
+
+###About
+
+Quantitative Descriptive Analytics focuses aims to gather an in-depth understanding of the underlying reasons and motivations for an event or observation and is typically represented with visuals or charts. 
+
+Qualitative Descriptive Analytics focsues on investigating a phenomenon via statistical, mathematical, and computationaly techniques. It aims to quantify an event with metrics and numbers. 
+
+In this lab, we will explore the marketing data set and understand it better through simple statistics. 
+
+###SetUp
+
+Make sure to download the folder titled 'bsad_lab3' zip folder and extract the
+folder to unzip it. Next, we must set this folder as the working directory. The
+way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working
+Directory', and click 'To Source File Location'. Now, follow the worksheet
+directions to complete the lab.
+
+----------
+
+###Task 1
+
+First begin by reading in the data, and viewing it to make sure we see it being read in correctly. 
+
+```{r}
+mydata <-read.csv(file="data/marketing.csv")
+mydata
+```
+
+Now we are tasked to calculate the Range, Min, Max, Mean, STDEV, and Variance for each variable. Below is an example of how to compute the items for the variable sales. Follow the example and do the same for radio, paper, tv, and pos. 
+
+Sales
+```{r}
+sales <- mydata$sales
+#Max
+max <- max(sales)
+max
+
+#Min
+min<- min(sales)
+min
+
+#Range
+max-min
+
+#Mean
+mean(sales)
+
+#Standard Deviation
+sd(sales)
+
+#Variance
+var(sales)
+
+range(sales)
+
+```
+
+Follow the example and do the same for radio, paper, tv, and pos. Use the worksheet given to try the different commands to find the max, min, and range. 
+
+----------
+
+###Task 2
+
+An easy way to calculate all of these statistics of all of these variables is with the summary function. Below is an example.
+
+```{r}
+summary(mydata)
+```
+
+There are some statistics not captured here like standard deviation and variance, but this is an easy and quick way to find most of your basic statistics. 
+
+Now, we will produce a basic blot of the sales. Here we utilize the plot function and within the plot function we call the variable we want to plot. 
+
+```{r}
+plot(sales)
+```
+
+When looking at this graph we cannot truly capture the data or see a clear pattern. A better way to visualize this plot would be to re-order the data based on increasing sales. 
+
+```{r}
+plot(sales, type="b", xlab = "Case Number", ylab = "Sales in $1,000") 
+```
+
+There are further ways to customize plots, such as changing the colors of the lines, adding a heading, or even making them interactive. 
+
+Now, lets plot all the sales graph, alongside radio, paper, and tv. 
+
+```{r}
+layout(matrix(1:4,2,2))
+plot(sales, type="b", xlab = "Case Number", ylab = "Sales in $1,000") 
+plot(mydata$radio, type="b", xlab = "Case Number", ylab = "Radio Ads in $1,000") 
+plot(mydata$paper, type="b", xlab = "Case Number", ylab = "Paper Ads in $1,000") 
+plot(mydata$tv, type="b", xlab = "Case Number", ylab = "TV Ads in $1,000") 
+
+```
+
+The 20 months case_number are in no particular order and not related to a chronological time sequence. They are simply 20 independent use case studies. Since each case is independent, we can reorder them. To reveal a potential trend, consider reordering the sales column from low to high and see how the other four variables behave.
+
+```{r}
+newdata <-mydata[order(sales),]
+newsales <-newdata$sales
+newradio<-newdata$radio
+newtv<-newdata$tv
+newpaper <-newdata$paper
+```
+
+
+```{r}
+layout(matrix(1:4,2,2))
+plot(newsales, type="b", xlab = "Case Number", ylab = "Sales in $1,000") 
+plot(newradio, type="b", xlab = "Case Number", ylab = "Radio Ads in $1,000") 
+plot(newpaper, type="b", xlab = "Case Number", ylab = "Paper Ads in $1,000") 
+plot(newtv, type="b", xlab = "Case Number", ylab = "TV Ads in $1,000") 
+
+```
+
+----------
+
+###Task 3
+
+Now, given a sales value of 25000, calculate the corresponding z-value or z-score using the mean and standard deviation calculations conducted in task 1. 
+
+We know that the z-score = (x - mean)/sd. So, input this into the R code where x=250000, mean=2617.052, and stdev = 6848961
+
+```{r}
+x<-25000
+mean<-2617.052
+stdev <-6848961
+
+z<- (x-mean)/stdev
+z
+
+```
+
+Based on the z-values, how would you rate a $25000 sales value: poor, average, good, or very good performance? Explain your logic. 
+
+----------

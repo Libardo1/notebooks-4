@@ -1,0 +1,153 @@
+---
+title: "Business Analytics Lab Workshop 2"
+author: "Kajal Chokshi"
+date: "June 5th 2017"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+subtitle: CME Group Foundation Business Analytics Lab
+---
+
+###About
+
+Today the lab focuses on data outliers, data preparation, and data modeling.
+This lab requires the use of Microsoft Excel, R, and erdplus
+
+###SetUp
+
+Make sure to download the folder titled 'bsad_lab2' zip folder and extract the
+folder to unzip it. Next, we must set this folder as the working directory. The
+way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working
+Directory', and click 'To Source File Location'. Now, follow the worksheet
+directions to complete the lab.
+
+---------
+
+###Task 1
+
+First, we must calculate the mean, standard deviation, maximum, and minimum for
+the Age column using both R and Excel.
+
+In R, we must read in the file again, extract the column and find the values that 
+are asked for.
+
+Average Age: 
+```{r}
+mydata <- read.csv(file="data/creditrisk.csv") 
+age <-mydata$Age 
+mean(age)
+```
+
+Standard Deviation of Age:
+```{r}
+sd(age)
+```
+
+Maximum of Age: 
+```{r}
+max(age)
+```
+
+Minimum of Age: 
+```{r}
+min(age)
+```
+
+Next, compute the same thing using Excel and compare results. Post a screenshot
+of this using the directions found in Worksheet 1. To screenshot, you can use
+the snipping tool and save the PNG image to the same folder all of the other
+data is.
+
+Next, use the formula from class to detect any outliers. Right the code to find
+the IQR by hand, and check it with the function that is given in R.
+
+```{r} 
+lowerq <- quantile(age)[2] 
+upperq <- quantile(age)[4] 
+iqr <- IQR(age) 
+iqr
+```
+
+The formuala below calculates the threshold. 
+```{r} 
+upperthreshold <- (iqr * 1.5) + upperq 
+lowerthreshold <- lowerq - (iqr * 1.5)
+upperthreshold 
+lowerthreshold
+
+```
+
+Are there any outliers? How many? It can also be useful to visualize the data
+using a box and whisker plot. The boxplot below supports the IQR we found of 15
+and upper and lower threshold.
+
+```{r} 
+boxplot(age) 
+```
+
+---------------
+
+###Task 2
+
+Next, we must calculate the mean for checking in Excel. Take a screenshot of
+this process and paste it here. How are the missing values are treated in the
+Excel calculation?
+
+Now, read the file into R. 
+
+```{r}
+newdata <-read.csv(file="data/creditriskorg.csv")
+newdata 
+```
+
+We observe that the column names are shifted down below. So, we must make sure
+to use the command skip and set the header to true.
+
+```{r} 
+newdata <- read.csv(file="data/creditriskorg.csv",
+skip=1,header=TRUE,sep=",") 
+newdata 
+```
+
+To calculate the mean for Checking in R, follow Worksheet 1. Extract the
+Checking column first and then find the average using the function built in R.
+What happens when we try to use the function?
+
+```{r} 
+checking <- newdata$Checking 
+```
+
+To resolve the error, we must remove understand where it is coming from. There
+are missing values in the csv file, which is quite common as most datasets are
+not perfect. Additionally, there are commas within the excel spreadsheet, and R
+does not recognize that '1,234' is equivalent to '1234'. Lastly, there are '$'
+symbols throughout the file which is not a numerica symbol either.
+
+The sub function replaces these symbols with something else. So, in order to
+remove the comma in the number "1,234", we must substitute it with just an empty
+space.
+
+```{r} 
+checking <- sub(",", "", checking) #substitute comma with blank in all of checking 
+checking <- sub("\\$", "", checking) #substitute dollar sign with blank in all of checking 
+checking <-  as.numeric(checking) #numeric convert 
+mean(checking, na.rm=TRUE) #mean with NA removed 
+```
+
+What are some other ways to clean this data in R? How about in Excel? 
+
+-------------
+
+###Task 3
+
+Now, we will look at divvybike data. Go to ```https://www.divvybikes.com/data?```Download latest 2016 Q3/Q4 data (zip file) and check the README file. 
+
+Open the file Divvy_Trips_2016_Q4 in Excel. Per the Data License Agreement who owns the data, and can the data be correlated with other sources?
+
+Note the size of the file, the number of columns and of rows here.??? Identify the unique entities and fields.
+
+Define a relational business logic for the column field 'tripduration'.
+
+Using www.erdplus.com draw a star schema using the following three tables:- A Fact table for Trip- A Dimension table for Station- A Dimension table for User
+
