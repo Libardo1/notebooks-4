@@ -18,7 +18,7 @@ An R Notebook is an R Markdown document with chunks that can be executed indepen
 
 A notebook for this class will consist of comments and directions followed by a chunk of code that can be ran independently in order for students to see the examples and follow along with the lessons.
 
-### SetUp
+### Setup
 
 To use R Notebooks, first R Studio must be opened. To create an R Notebook in RStudio, go to File -> New File -> R Notebook. In this course though, the notebooks will be created and prior to the class and students will edit them as the lab proceeds.
 
