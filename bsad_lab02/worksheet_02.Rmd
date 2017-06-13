@@ -1,7 +1,6 @@
 ---
-title: "Business Analytics Lab Workshop 2"
-author: "Kajal Chokshi"
-date: "June 5th 2017"
+title: "Business Analytics Lab Worksheet 02"
+date: "Summer 2017"
 output:
   html_notebook: default
   html_document: default
@@ -9,12 +8,12 @@ output:
 subtitle: CME Group Foundation Business Analytics Lab
 ---
 
-###About
+### About
 
 Today the lab focuses on data outliers, data preparation, and data modeling.
-This lab requires the use of Microsoft Excel, R, and erdplus
+This lab requires the use of Microsoft Excel, R, and ERDplus
 
-###SetUp
+### SetUp
 
 Make sure to download the folder titled 'bsad_lab2' zip folder and extract the
 folder to unzip it. Next, we must set this folder as the working directory. The
@@ -24,7 +23,7 @@ directions to complete the lab.
 
 ---------
 
-###Task 1
+### Task 1
 
 First, we must calculate the mean, standard deviation, maximum, and minimum for
 the Age column using both R and Excel.
@@ -72,10 +71,9 @@ iqr
 The formuala below calculates the threshold. 
 ```{r} 
 upperthreshold <- (iqr * 1.5) + upperq 
+upperthreshold
 lowerthreshold <- lowerq - (iqr * 1.5)
-upperthreshold 
 lowerthreshold
-
 ```
 
 Are there any outliers? How many? It can also be useful to visualize the data
@@ -88,7 +86,7 @@ boxplot(age)
 
 ---------------
 
-###Task 2
+### Task 2
 
 Next, we must calculate the mean for checking in Excel. Take a screenshot of
 this process and paste it here. How are the missing values are treated in the
@@ -129,21 +127,28 @@ remove the comma in the number "1,234", we must substitute it with just an empty
 space.
 
 ```{r} 
-checking <- sub(",", "", checking) #substitute comma with blank in all of checking 
-checking <- sub("\\$", "", checking) #substitute dollar sign with blank in all of checking 
-checking <-  as.numeric(checking) #numeric convert 
-mean(checking, na.rm=TRUE) #mean with NA removed 
+#substitute comma with blank in all of checking 
+checking <- sub(",", "", checking) 
+
+#substitute dollar sign with blank in all of checking 
+checking <- sub("\\$", "", checking) 
+
+#numeric convert
+checking <-  as.numeric(checking) 
+
+#mean with NA removed 
+mean(checking, na.rm=TRUE) 
 ```
 
 What are some other ways to clean this data in R? How about in Excel? 
 
 -------------
 
-###Task 3
+### Task 3
 
-Now, we will look at divvybike data. Go to ```https://www.divvybikes.com/data?```Download latest 2016 Q3/Q4 data (zip file) and check the README file. 
+Now, we will look at divvybike data. Go to [https://www.divvybikes.com/system-data](https://www.divvybikes.com/system-data) Download latest data (zip file) and go over the README file. 
 
-Open the file Divvy_Trips_2016_Q4 in Excel. Per the Data License Agreement who owns the data, and can the data be correlated with other sources?
+Open the file in Excel. Per the Data License Agreement who owns the data, and can the data be correlated with other sources?
 
 Note the size of the file, the number of columns and of rows here.??? Identify the unique entities and fields.
 

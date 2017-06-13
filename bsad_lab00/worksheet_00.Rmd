@@ -1,23 +1,24 @@
 ---
-title: "R Tutorial Lab 0"
-author: "Kajal Chokshi"
-date: "June 6, 2017"
+title: "Working with RStudio Notebooks"
+date: "Summer 2017"
 output:
-  pdf_document: default
+  html_notebook: default
   html_document: default
+  pdf_document: default
+subtitle: CME Group Foundation Business Analytics Lab
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-###About
+###  About
 
 An R Notebook is an R Markdown document with chunks that can be executed independently and interactively, with output visible immediately beneath the input. R Notebooks are a method of literate programming that allows for direct interaction with R while producing a reproducible document with publication-quality output. 
 
 A notebook for this class will consist of comments and directions followed by a chunk of code that can be ran independently in order for students to see the examples and follow along with the lessons.
 
-###SetUp
+### SetUp
 
 To use R Notebooks, first R Studio must be opened. To create an R Notebook in RStudio, go to File -> New File -> R Notebook. In this course though, the notebooks will be created and prior to the class and students will edit them as the lab proceeds.
 
@@ -25,13 +26,13 @@ Typically a data set or notebook will be downloaded and it is important to set t
 
 ![](imgs/swd.png)
 
-###Header
+### Header
 
 The header is the very first few lines of code that give important information about the document. It is essential to edit this information everytime to ensure you are credited for your work and so people looking at your code know when and where it is coming from. 
 
 ![](imgs/header.png)
 
-###Inserting Chunks of Code
+### Inserting Chunks of Code
 
 Notebook chunks can be inserted quickly using the keyboard shortcut Ctrl + Alt + I (OS X: Cmd + Option + I), or via the Insert command in the editor toolbar found at the top.
 
@@ -41,9 +42,9 @@ A chunk of empty code looks like this in the notebook before it is published:
 
 ![](imgs/empty.png)
 
-It will always begin with they ``` symbol followed by the {r} and ending with the ```. In this light grey box, you can code after the {r} and before the second ``` symbol.  You can insert as many chunks of code as you would like as it is user preference. Typically, in an R Notebook, we aspire to have one output per chunk of code. If there will be more than one output, it is best to split the code. 
+It will always begin with they \`\`\` symbol followed by the `{r}` and ending with the \`\`\`. In this light grey box, you can code after the `{r}` and before the second \`\`\` symbol.  You can insert as many chunks of code as you would like as it is user preference. Typically, in an R Notebook, we aspire to have one output per chunk of code. If there will be more than one output, it is best to split the code. 
 
-###Executing Code
+### Executing Code
 
 In order to run the code, you have several options.
 
@@ -55,7 +56,7 @@ In order to run the code, you have several options.
 
 ![](imgs/runall.png)
 
-####Example Executing Code
+#### Example Executing Code
 
 After downloading a data set, we must read the data in. So, create an R code chunk in the R Notebook and write the code to read in the file. To make sure the file is read correctly, run the chunk. The code should look something like this. 
 
@@ -67,7 +68,7 @@ The green triangle with the red square around button is the 'run' button. If sel
 
 This is the output. If the output is not what you want, or if there is an error, you can simply go back to the code chunk, edit the code, and rerun it. 
 
-###Errors
+### Errors
 
 When coding, there are often small errors that are made. With R Notebooks, the message will display exactly what line your error is on, which allows you to fix it. 
 
@@ -75,16 +76,16 @@ In the example, below we see that the error is made because we forgot to set the
 
 ![](imgs/error.png)
 
-###Comments
-When working on a lab, it is important to leave comments within your code to understand what you are doing when you refer to it later. A comment is made in the grey code chunk box by putting a "#" symbol in front of text. This is what a comment will look like:
+### Comments
+When working on a lab, it is important to leave comments within your code to understand what you are doing when you refer to it later. A comment is made in the grey code chunk box by putting a "\#" symbol in front of text. This is what a comment will look like:
 
 ![](imgs/comment.png)
 
-###Overall Impact
+### Overall Impact
 
 R Notebooks are revolutionary as they allow students to edit within the file and see the changes that are made with the output immediately without have to run the entire code. Please refer to this guide or the instructor with other questions.
 
-source: http://rmarkdown.rstudio.com/r_notebooks.html
+source: [http://rmarkdown.rstudio.com/r_notebooks.html](http://rmarkdown.rstudio.com/r_notebooks.html)
 
 
 

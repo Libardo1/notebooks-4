@@ -1,7 +1,6 @@
 ---
-title: "Business Analytics Lab Workshop 6"
-author: "Kajal Chokshi"
-date: "June 7th 2017"
+title: "Business Analytics Lab Worksheet 06"
+date: "Summer 2017"
 output:
   html_notebook: default
   html_document: default
@@ -9,56 +8,81 @@ output:
 subtitle: CME Group Foundation Business Analytics Lab
 ---
 
-###About
+### About
 
 In this lab we will focus on linear and non-linear programming. Linear programming, as discussed in the previous lab, works with simple and multiple linear regression techniques; sometimes the variables have completely direct or completely non-direct relationships and these techniques can model them. Sometimes, however, the variables do not predict each other in a linear way. For example, looking at the stock market vs. time, we know that generally the market was booming before the crash, then the market crashed and the great depression hit, and slowly the market started to rise again. This pattern is not linear, and in fact a non-linear programming technique can be used to model it and predict the value of the market based on the year. 
 
 In this lab, we will explore topics like optimization, solve a marketing model, and perform linear and non-linear regression on the cost of servers.
 
-###SetUp
+### SetUp
 
 Make sure to download the folder titled 'bsad_lab6' zip folder and extract the folder to unzip it. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab.
 
 ----------
 
-###Task 1
+### Task 1
 
-In the first part of this lab, we will focus on 
+In the first part of this lab, we will focus installing a package in R for this case this an optimization package. 
 
-Adding Optimization package to R.  Note the 'l' below are as in 'L'
+Note the 'l' below are as in 'L'
 ```{r}
-install.packages("lpSolveAPI") #install special package required for the solver
-library("lpSolveAPI") # load package library
+#install special package required for the solver
+install.packages("lpSolveAPI") 
 
+# load package library
+library("lpSolveAPI") 
 ```
 
 
-Solving Marketing Model 
+#### Solving Marketing Model
+
+Create the model object in R.
 ```{r}
-lprec <- make.lp(0, 2) # model object
-lp.control(lprec, sense="max")  # set for maximum
+lprec <- make.lp(0, 2) 
+```
+
+Now we set the constrains and objective function for the model.
+
+```{r}
+# set for maximum
+lp.control(lprec, sense="max")  
 set.objfn(lprec, c(275.691, 48.341))
+
+# add constrains
 add.constraint(lprec, c(1, 1), "<=", 350000)
 add.constraint(lprec, c(1, 0), ">=", 15000)
 add.constraint(lprec, c(0, 1), ">=", 75000)
 add.constraint(lprec, c(2, -1), "=", 0)
-lprec # view the problem formulation in tabular/matrix form
-solve(lprec) # solve 
-get.objective(lprec) #display the objective function optimum value
-get.variables(lprec) # display the variables optimum values
-
 ```
 
+Now we can explore and solve the model using the `lpSolveAPI` package.
+
+```{r}
+# view the problem formulation in tabular/matrix form
+lprec
+
+# solve 
+solve(lprec) 
+
+#display the objective function optimum value
+get.objective(lprec)
+
+# display the variables optimum values
+get.variables(lprec) 
+```
 
 -----------
 
-###Task 2
+### Task 2
 
 First, make sure to read the file in. Make sure to extract the two columns to use later. 
 
 ```{r}
 mydata <- read.csv("data/ServersCost.csv", header=TRUE)
-mydata
+head(mydata)
+```
+
+```{r}
 servers <- mydata$servers
 cost <- mydata$cost
 ```
@@ -66,35 +90,55 @@ cost <- mydata$cost
 Next, create a linear model. First, we plot the points to visually see the data. Then create a model as we did in the last lab and plot the model directly on top of the graph.
 
 ```{r}
-plot(servers,cost)
 linear_model <- lm(cost ~ servers)
-abline(linear_model, col="blue", lwd=2) # add linear line based on regression model
 summary(linear_model)
+```
 
+```{r}
+# add linear line based on regression model
+plot(servers,cost)
+abline(linear_model, col="blue", lwd=2)
 ```
 
 We notice that this model is not very good at predicting the cost. So, we use a transformation and use a nonlinear quadratic model. 
 
 ```{r}
 servers2 <- servers^2
-quad_model <- lm(cost ~ servers+servers2) # of form x + x^2
+
+# The model formula is of the form y =x + x^2
+quad_model <- lm(cost ~ servers+servers2)
 summary(quad_model)
 ```
 
 ```{r}
-predicted2 <- predict(quad_model,data=mydata) # compute the predicted values based on the quad model
-par(new=TRUE, xaxt="n", yaxt="n", ann=FALSE) # needed to overlay new points without the labels and annotations
-plot(predicted2, col="red") # Use the red color to discern new points
+# compute the predicted values based on the quad model
+predicted2 <- predict(quad_model,data=mydata)
+
+# needed to overlay new points without the labels and annotations
+par(new=TRUE, xaxt="n", yaxt="n", ann=FALSE)
+
+# Use the red color to discern new points
+plot(predicted2, col="red") 
 ```
 
 Lets try a cubic model just to see how it will work. 
 
 ```{r}
 servers3<-servers^3
-cubic_model<-lm(cost ~ servers+servers2+servers3) # of form x + x^2 + x^3
+
+# The model formula is of the form x + x^2 + x^3
+cubic_model<-lm(cost ~ servers+servers2+servers3) 
 summary(cubic_model)
-predicted3 <- predict(cubic_model,data=mydata) # compute the predicted values based on the cubic model
-par(new=TRUE, xaxt="n", yaxt="n", ann=FALSE) # overlay new points without the labels and annotations
-plot(predicted3, col="green") # Use the green color to identify new points
+```
+
+```{r}
+# compute the predicted values based on the cubic model
+predicted3 <- predict(cubic_model,data=mydata) 
+
+# overlay new points without the labels and annotations
+par(new=TRUE, xaxt="n", yaxt="n", ann=FALSE)
+
+# Use the green color to identify new points
+plot(predicted3, col="green") 
 ```
 

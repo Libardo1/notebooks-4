@@ -1,7 +1,6 @@
 ---
-title: "Business Analytics Lab Workshop 7"
-author: "Kajal Chokshi"
-date: "June 8th 2017"
+title: "Business Analytics Lab Worksheet 07"
+date: "Summer 2017"
 output:
   html_notebook: default
   html_document: default
@@ -9,7 +8,7 @@ output:
 subtitle: CME Group Foundation Business Analytics Lab
 ---
 
-###About
+### About
 
 In this lab we will focus on sensitivity analysis and monte carlo simulations. 
 
@@ -23,29 +22,38 @@ Below is the Monte Carlo method applied to approximating the value of ??, which 
 
 In this lab, we will learn how to generate random samples with various simulations. 
 
-###SetUp
+### Setup
 
 Make sure to download the folder titled 'bsad_lab7' zip folder and extract the folder to unzip it. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab.
 
 ----------
 
-###Task 1 
+### Task 1 
 
 We will be solving the marketing case in Chapter 7 and performing a sensitivity analysis. You may use Solve in Excel, and if you do so, screenshot the results and attach them below. 
 
 If we use R, we must first download the appropriate package. 
 ```{r}
-# LP Optimization
-install.packages("lpSolveAPI") #install special package
-library("lpSolveAPI") # load package library
+# LP Optimization - package install
+install.packages("lpSolveAPI") 
+
+# load package library
+library("lpSolveAPI")
 ```
 
-Now, we will solve the marketing case. 
+Now, we will solve the marketing case (Chapter 7). 
 ```{r}
-# Solving Marketing Case in Chapter 7
-lprec <- make.lp(0, 2) # model object
-lp.control(lprec, sense="max")  # set for maximum
+# model object
+lprec <- make.lp(0, 2)
+
+# set for maximum
+lp.control(lprec, sense="max") 
 set.objfn(lprec, c(275.691, 48.341))
+```
+
+Add constrains to the model.
+
+```{r}
 add.constraint(lprec, c(1, 1), "<=", 350000)
 add.constraint(lprec, c(1, 0), ">=", 15000)
 add.constraint(lprec, c(0, 1), ">=", 75000)
@@ -55,21 +63,30 @@ add.constraint(lprec, c(0, 1), ">=", 0)
 ```
 
 Now, view the problem setting in tabular/matrix form. This is a good checkpoint!
+
 ```{r}
-lprec 
-solve(lprec) # solve
+lprec
+# solve
+solve(lprec) 
 ```
 
 Next we get the optimum results.
 ```{r}
-get.objective(lprec) # display the objective function optimum value
-get.variables(lprec) # display the variables optimum values
+# display the objective function optimum value
+get.objective(lprec)
+
+# display the variables optimum values
+get.variables(lprec)
 ```
 
 Lastly, we obtain the sensitivity results. 
 ```{r}
-get.sensitivity.obj(lprec)# display sensitivity to coefficients of objective function
-get.sensitivity.rhs(lprec) # display sensitivity to right hand side constraints
+
+# display sensitivity to coefficients of objective function
+get.sensitivity.obj(lprec)
+
+# display sensitivity to right hand side constraints
+get.sensitivity.rhs(lprec) 
 ```
 
 In the space below, write a small paragraph to explain/interpret the sensitivity results highlighting the binding/non-binding constraints, the surplus/slack, and marginal values.
@@ -78,26 +95,40 @@ Now, try to reproduce the results above by making independent small changes to t
 
 ----------
 
-###Task 2
+### Task 2
 
 Now we will be running a Monte Carlo simulation in Excel and in R. We will be using S&P weekly cumulative return > 5%. 
-First, for Excel, refer to the guidelines in the 3mn video link ``` https://www.youtube.com/watch?v=wKdmEXCvo9s ```. Reproduce in Excel the S&P example using NORMINV (returns the inverse of the normal cumulative distribution for the specified mean and standard deviation).  Consider only 100 simulations. Take a screenshot of your work and paste it below. 
+First, for Excel, refer to the guidelines in the 3 minute video [https://www.youtube.com/watch?v=wKdmEXCvo9s](https://www.youtube.com/watch?v=wKdmEXCvo9s). Reproduce in Excel the S&P example using NORMINV (returns the inverse of the normal cumulative distribution for the specified mean and standard deviation).  Consider only 100 simulations. Take a screenshot of your work and paste it below. 
 
 Now, we will use R to genereate 100 random samples from a normal distribution with a mean of 0.03 (%) and a  standard deviation of 0.97 (%). Given the 100 random samples, calculate the mean, standard deviation, and probability of occurrence where the simulation result is greater than 5%. 
 
 To do this in R, simply use the rnorm() function. See the example below for the number of runs to 100.
 
 ```{r}
-runs <- 100 # number of simulations/samples
-sims <-  rnorm(runs,mean=0.03,sd=0.97) # random number generator per defined normal distribution 
-average <- mean(sims) # Mean calculated from the random distribution based on samples
+# number of simulations/samples
+runs <- 100 
+# random number generator per defined normal distribution
+sims <-  rnorm(runs,mean=0.03,sd=0.97)
+```
+
+```{r}
+# Mean calculated from the random distribution based on samples
+average <- mean(sims)
 average
-std <- sd(sims) # STD calculated from the random distribution based on samples
+```
+
+```{r}
+# STD calculated from the random distribution based on samples
+std <- sd(sims) 
 std
-prob <- sum(sims >=0.05)/runs # probability of occurrence on any given day based on samples
+```
+
+```{r}
+# probability of occurrence on any given day based on samples
+prob <- sum(sims >=0.05)/runs
 prob
 ```
 
-Remember, each time that this code runs, new numbers will be generated. Still though, write all of the observations for each case where the number of runs = 10, 100, 1000, 10000, and 100000.  
+Remember, each time that this code runs, new numbers will be generated. Still though, write all of the observations for each case where the number of `runs = 10, 100, 1000, 10000, and 100000`.  
 
 Describe how the values change/behave as the number of simulations increase. What is your best bet on the probability of occurrence greater than 5%? What are some trends that we see? How is this similar to the ?? image that was discussed in the introductory paragraph? 

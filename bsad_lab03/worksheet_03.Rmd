@@ -1,7 +1,6 @@
 ---
-title: "Business Analytics Lab Workshop 3"
-author: "Kajal Chokshi"
-date: "June 7th 2017"
+title: "Business Analytics Lab Worksheet 03"
+date: "Summer 2017"
 output:
   html_notebook: default
   html_document: default
@@ -9,7 +8,7 @@ output:
 subtitle: CME Group Foundation Business Analytics Lab
 ---
 
-###About
+### About
 
 Quantitative Descriptive Analytics focuses aims to gather an in-depth understanding of the underlying reasons and motivations for an event or observation and is typically represented with visuals or charts. 
 
@@ -17,7 +16,7 @@ Qualitative Descriptive Analytics focsues on investigating a phenomenon via stat
 
 In this lab, we will explore the marketing data set and understand it better through simple statistics. 
 
-###SetUp
+### SetUp
 
 Make sure to download the folder titled 'bsad_lab3' zip folder and extract the
 folder to unzip it. Next, we must set this folder as the working directory. The
@@ -27,13 +26,13 @@ directions to complete the lab.
 
 ----------
 
-###Task 1
+### Task 1
 
 First begin by reading in the data, and viewing it to make sure we see it being read in correctly. 
 
 ```{r}
 mydata <-read.csv(file="data/marketing.csv")
-mydata
+head(mydata)
 ```
 
 Now we are tasked to calculate the Range, Min, Max, Mean, STDEV, and Variance for each variable. Below is an example of how to compute the items for the variable sales. Follow the example and do the same for radio, paper, tv, and pos. 
@@ -41,11 +40,11 @@ Now we are tasked to calculate the Range, Min, Max, Mean, STDEV, and Variance fo
 Sales
 ```{r}
 sales <- mydata$sales
-#Max
+#Max Sales
 max <- max(sales)
 max
 
-#Min
+#Min Sales
 min<- min(sales)
 min
 
@@ -69,7 +68,7 @@ Follow the example and do the same for radio, paper, tv, and pos. Use the worksh
 
 ----------
 
-###Task 2
+### Task 2
 
 An easy way to calculate all of these statistics of all of these variables is with the summary function. Below is an example.
 
@@ -126,22 +125,22 @@ plot(newtv, type="b", xlab = "Case Number", ylab = "TV Ads in $1,000")
 
 ----------
 
-###Task 3
+### Task 3
 
 Now, given a sales value of 25000, calculate the corresponding z-value or z-score using the mean and standard deviation calculations conducted in task 1. 
 
-We know that the z-score = (x - mean)/sd. So, input this into the R code where x=250000, mean=2617.052, and stdev = 6848961
+We know that the `z-score = (x - mean)/sd`. So, input this into the R code where `x=250000`, `mean=2617.052`, and `stdev = 6848961`
 
 ```{r}
-x<-25000
-mean<-2617.052
-stdev <-6848961
+x <- 25000
+mean <- 2617.052
+stdev <- 6848961
 
-z<- (x-mean)/stdev
+z <- (x-mean)/stdev
 z
 
 ```
 
-Based on the z-values, how would you rate a $25000 sales value: poor, average, good, or very good performance? Explain your logic. 
+Based on the z-values, how would you rate a `$25000` sales value: poor, average, good, or very good performance? Explain your logic. 
 
 ----------

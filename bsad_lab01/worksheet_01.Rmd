@@ -1,7 +1,6 @@
 ---
-title: "Business Analytics Lab Workshop 1"
-author: "Kajal Chokshi"
-date: "June 5th 2017"
+title: "Business Analytics Lab Worksheet 01"
+date: "Summer 2017"
 output:
   html_notebook: default
   html_document: default
@@ -9,21 +8,21 @@ output:
 subtitle: CME Group Foundation Business Analytics Lab
 ---
 
-###About
+### About
 
 R-Studio is a free and open-source integrated development environment (IDE) for R, a programming language for statistical computing and graphics. The Credit Risk Data displays the credit risk of an individual based on the loan they have taken out and other features of the individual. 
 
-###Capabilities
+### Capabilities
 
 R studio is able to compute various statistical and graphical techniques, such as linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, time series plots, maps, etc. 
 
-###SetUp
+### SetUp
 
 After downloading the bdad_lab1 zip folder, make sure to open the folder in the downloads, right click it, and select 'extract'. This will give you a new unzipped folder. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab. 
 
 --------------
 
-###Task 1
+### Task 1
 
 To begin the Lab, examine the content of the csv file and upload the simple star relational schema that is created from erdplus, here. 
 
@@ -43,13 +42,13 @@ Below is an example of how this should look.
 
 -------------
 
-###Task 2
+### Task 2
 
 Next, read the csv file into R Studio. It can be useful to name your data to create a shortcut to it. Here we will label the data, 'mydata'. To see the data in the console, one can 'Call' it by referring to it by its given name.
 
 ```{r}
 mydata <- read.csv(file="data/creditrisk.csv")
-mydata 
+head(mydata)
 ```
 
 To capture the checking and savings columns and perform some analytics on them, we must first be able to extract the columns from the data separately. Using the '$' sign following the label for the data extracts a specific column. For convenience, we relabel the extracted data. 
@@ -89,7 +88,7 @@ Of the Checking and Savings, which has a higher SNR? Why do you think that is?
 
 ------------
 
-###Task 3
+### Task 3
 
 After using Watson Analytics to find patterns in the data, save your work and upload a screenshot here. Refer to Task 1 on how to upload a photo.
 
