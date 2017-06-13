@@ -16,7 +16,7 @@ R-Studio is a free and open-source integrated development environment (IDE) for 
 
 R studio is able to compute various statistical and graphical techniques, such as linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, time series plots, maps, etc. 
 
-### SetUp
+### Setup
 
 After downloading the bdad_lab1 zip folder, make sure to open the folder in the downloads, right click it, and select 'extract'. This will give you a new unzipped folder. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab. 
 
@@ -35,10 +35,10 @@ To add a picture, use the following command and preview it.
 Below is an example of how this should look.
 
 ```
-![](imgs/Koala.jpg)
+![](imgs/koala.jpg)
 ```
 
-![](imgs/Koala.jpg)
+![](imgs/koala.jpg)
 
 -------------
 

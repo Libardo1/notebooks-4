@@ -13,7 +13,7 @@ subtitle: CME Group Foundation Business Analytics Lab
 Today the lab focuses on data outliers, data preparation, and data modeling.
 This lab requires the use of Microsoft Excel, R, and ERDplus
 
-### SetUp
+### Setup
 
 Make sure to download the folder titled 'bsad_lab2' zip folder and extract the
 folder to unzip it. Next, we must set this folder as the working directory. The

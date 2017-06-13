@@ -16,7 +16,7 @@ Qualitative Descriptive Analytics focsues on investigating a phenomenon via stat
 
 In this lab, we will explore the marketing data set and understand it better through simple statistics. 
 
-### SetUp
+### Setup
 
 Make sure to download the folder titled 'bsad_lab3' zip folder and extract the
 folder to unzip it. Next, we must set this folder as the working directory. The

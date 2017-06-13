@@ -14,7 +14,7 @@ In this lab we will focus on linear and non-linear programming. Linear programmi
 
 In this lab, we will explore topics like optimization, solve a marketing model, and perform linear and non-linear regression on the cost of servers.
 
-### SetUp
+### Setup
 
 Make sure to download the folder titled 'bsad_lab6' zip folder and extract the folder to unzip it. Next, we must set this folder as the working directory. The way to do this is to open R Studio, go to 'Session', scroll down to 'Set Working Directory', and click 'To Source File Location'. Now, follow the worksheet directions to complete the lab.
 
